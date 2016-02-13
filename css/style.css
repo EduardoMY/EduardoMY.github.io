@@ -1,0 +1,9 @@
+@font-face{
+    font-family: adobeProFont;
+    src: url("../fonts/SourceCodePro-Light.otf") format('opentype');
+}
+body {
+    font-family: adobeProFont;
+    font-weight: bold;
+    font-size: 20px;
+}
