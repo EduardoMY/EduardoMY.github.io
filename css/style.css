@@ -2,8 +2,72 @@
     font-family: adobeProFont;
     src: url("../fonts/SourceCodePro-Light.otf") format('opentype');
 }
+wrapper {
+    margin: 0;
+    padding: 0;
+    height:100hv;
+    min-height:100hv;
+    position:relative;
+}
 body {
+    margin: 0px 0px 0px 0px;
+    /*min-height: 100vh; */
     font-family: adobeProFont;
     font-weight: bold;
     font-size: 20px;
+}
+
+header nav{
+    width: 100%;
+    margin: 0px 0px 0px 0px;
+    padding: 0;
+    background-color: #26a69a;
+}
+header nav ul {
+    list-style-type: none;
+    margin:0;
+    padding:0;
+}
+header nav ul li a {
+    color: black;
+    text-decoration: none;
+    display: block;
+    width: 60px;
+}
+header nav ul li a:hover {
+    color:red;
+}
+i {
+    size: 100px;
+}
+div.boxwrap{
+    /*min-height: 100vh; */
+    padding: 10px;
+}
+
+
+footer {
+    width: 100%;
+    position:absolute;
+    bottom:0;
+    left:0;
+    background-color: #26a69a;
+}
+header nav ul li div.dropdown{
+    
+}
+
+/* Smartphones */
+@media screen and (min-width: 768px) {
+
+}
+
+/* Tablets */
+@media screen and (min-width: 992px){
+
+}
+
+/* Desktops */
+@media screen and (min-width: 1200px){
+
 }
