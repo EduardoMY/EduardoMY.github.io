@@ -16,50 +16,100 @@ body {
     font-weight: bold;
     font-size: 20px;
 }
-
 header nav{
     width: 100%;
     margin: 0px 0px 0px 0px;
     padding: 0;
     background-color: #26a69a;
 }
-header nav ul {
-    list-style-type: none;
-    margin:0;
-    padding:0;
+
+div .dropbtn {
+    padding: 5px;
+    color:white;
+    background-color: #26a69a;
+    border:none;
+    cursor:pointer;
 }
-header nav ul li a {
+div .dropdown{
+    position:relative;
+    display:inline-block;
+    
+}
+div .dropdown-content{
+    display:none;
+    position:absolute;
+    background-color: yellow;
+    min-width: 160px;
+
+}
+
+div .dropdown-content a {
+    display:block;
+}
+
+div .dropdown-content a:hover{
+    background-color: black;
+}
+
+.dropdown:hover .dropdown-content{
+    display:block;
+}
+
+article .main h1{ 
+    text-align: center;
+}
+
+section .main-content p{
+    text-align: center;
+}
+
+i .menu {
+    color: white;
+}
+i .content{
     color: black;
+}
+div .dropdown-content a {
+    color: white;
     text-decoration: none;
-    display: block;
-    width: 60px;
 }
-header nav ul li a:hover {
-    color:red;
-}
-i {
-    size: 100px;
+a {
+    text-decoration: none;
+    
 }
 div.boxwrap{
-    /*min-height: 100vh; */
     padding: 10px;
 }
+aside {
+    
+}
+/* 
+Total 12 columnas
+*/
 
-
+div.col {
+    width: 100%;
+    padding: 20px;
+}
 footer {
     width: 100%;
+    text-align:center;
+    font-size: 10px;
     position:absolute;
     bottom:0;
     left:0;
     background-color: #26a69a;
 }
-header nav ul li div.dropdown{
-    
-}
 
 /* Smartphones */
 @media screen and (min-width: 768px) {
 
+    aside{
+	width:100%;
+    }
+    div.col{
+	width:100%;
+    }
 }
 
 /* Tablets */

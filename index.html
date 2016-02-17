@@ -3,36 +3,43 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
     <link rel="stylesheet" href="fonts/font-awesome-4.5.0/css/font-awesome.min.css">
+-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <title> Eduardo Medina</title>
+    <title> Eduardo Medina - Blog</title>
   </head>
   <body>
     <header>
       <nav>
-	<ul>
-	  <li> <a href="#">  <i class="material-icons button"> menu </i> </a> </li>
-	  <li> <a href="foxforce.html">  Fox Force  </a> </li>
-	  <li>  <a href="#">  <i class="material-icons button"> About Me </i> </a> </li>
-	  <li>  <a href="#">  <i class="material-icons button"> Contact </i> </a> </li>
-	</ul>
+	<div class="dropdown">
+	  <button class="dropbtn"> <i class="material-icons menu"> menu </i>  </button>
+	  <div class="dropdown-content">
+	    <a href="index.html"> <i class="material-icons menu"> home </i> Ohana</a>
+	    <a href="foxforce.html">  <i class="material-icons menu"> flight </i> Fox Force  </a>
+	    <a href="projects.html"> 
+	    <a href="about.html"> <i class="material-icons button menu"> person </i> About Me </a> 
+	    <a href="contact.html">  <i class="material-icons button menu"> send </i> Contact  </a> 
+	  </div>
+	</div>
+	
       </nav>
     </header>
     <div class="boxwrap">
-      <article>
-	<section>
-	  
+      <article class="main">
+	<h1> Hello World!  <i class="material-icons">face</i></h1>
+	<section class="main-content">  
+	  <p> This is my personal blog. I will try to keep it updated as frequently as I can. In this space I'll show you my projects or repositories I have linked with my Github Account. If you are interested to know the technology I used to make this website possible, you can click the link below. </p>
+	  <a hef="https://github.com/EduardoMY/EduardoMY.github.io"><i class="material-icons"> code </i></a>
 	</section>
       </article>
       <aside>
       </aside>
-      
-      <span class="fa fa-camera-retro fa-lg"></span>  Hello World <i class="material-icons">face</i>
     </div>
     <footer>
-      Hola <i class="material-icons"> android </i>
+      This is a personal blog. I make use of Material design Concept and icons as well.  <i class="material-icons"> r </i>
     </footer> 
   </body>
 </html>
