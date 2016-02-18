@@ -5,13 +5,10 @@
 wrapper {
     margin: 0;
     padding: 0;
-    height:100hv;
-    min-height:100hv;
     position:relative;
 }
 body {
     margin: 0px 0px 0px 0px;
-    /*min-height: 100vh; */
     font-family: adobeProFont;
     font-weight: bold;
     font-size: 20px;
@@ -21,7 +18,7 @@ header nav{
     margin: 0px 0px 0px 0px;
     padding: 0;
     background-color: #26a69a;
-    box-shadow: 0px 0px 5px black;
+    box-shadow: p0x 0px 5px black;
 }
 
 div .dropbtn {
@@ -32,6 +29,7 @@ div .dropbtn {
     cursor:pointer;
 }
 div .dropdown{
+    min-width: 160px;
     position:relative;
     display:inline-block;
     
@@ -39,7 +37,7 @@ div .dropdown{
 div .dropdown-content{
     display:none;
     position:absolute;
-    background-color: yellow;
+    background-color:  #26a69a;
     min-width: 160px;
 
 }
@@ -52,17 +50,16 @@ div .dropdown-content a:hover{
     background-color: black;
 }
 
-.dropdown:hover .dropdown-content{
+div.dropdown:hover div.dropdown-content{
     display:block;
 }
-
-article .main h1{ 
+.main {
+    padding:10%;
+}
+.main h1, .main-content p{ 
     text-align: center;
 }
 
-section .main-content p{
-    text-align: center;
-}
 
 i .menu {
     color: white;
@@ -84,11 +81,8 @@ div.boxwrap{
     padding: 10px;
 }
 aside {
-    
+    width: 25%;
 }
-/* 
-Total 12 columnas
-*/
 
 div.col {
     width: 100%;
@@ -111,14 +105,14 @@ footer {
     aside{
 	width:100%;
     }
-    div.col{
-	width:100%;
-    }
+    
 }
 
 /* Tablets */
 @media screen and (min-width: 992px){
-
+    aside {
+	width: 33%;
+    }
 }
 
 /* Desktops */
