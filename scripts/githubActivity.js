@@ -1,18 +1,27 @@
-var buttonMenu=document.getElementById("dropbtn");
-var menu=document.getElementById("dropdown-content");
-
-buttonMenu.onmouseover=function(){
-	menu.style.display='block';    
+//GET the string of the 
+jQuery.githubUser = function(username, callback) {
+    jQuery.getJSON("http://github.com/api/v3/json/" + username + "?callback=?", callback);
 }
 
-menu.onmouseover=function(){
-    menu.style.display='block';
-}
+jQuery.fn.loadRepositories = function(username) {
+  this.html("<span>Querying GitHub for " + username +"'s repositories...</span>");
 
-buttonMenu.onmouseout=function(){
-    menu.style.display='none';
-}
+  var target = this;
+  $.githubUser(username, function(data) {
+    var repos = data.user.repositories;
+    sortByNumberOfWatchers(repos);
 
-menu.onmouseout=function(){
-    menu.style.display='none';
-}
+    var list = $('<dl/>');
+    target.empty().append(list);
+    $(repos).each(function() {
+      list.append('<dt><a href="'+ this.url +'">' + this.name + '</a></dt>');
+      list.append('<dd>' + this.description + '</dd>');
+    });
+  });
+
+  function sortByNumberOfWatchers(repos) {
+    repos.sort(function(a,b) {
+      return b.watchers - a.watchers;
+    });
+  }
+};
