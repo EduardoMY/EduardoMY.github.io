@@ -5,7 +5,6 @@
 wrapper {
     margin: 0;
     padding: 0;
-    position:relative;
 }
 body {
     margin: 0px 0px 0px 0px;
@@ -20,39 +19,39 @@ header nav{
     background-color: #26a69a;
     box-shadow: p0x 0px 5px black;
 }
-
-div .dropbtn {
+div #dropdown{
+    max-width: 160px;
+    position:relative;
+    display:inline-block;
+    
+}
+div #dropbtn {
     padding: 5px;
     color:white;
     background-color: #26a69a;
     border:none;
     cursor:pointer;
 }
-div .dropdown{
-    min-width: 160px;
-    position:relative;
-    display:inline-block;
-    
-}
-div .dropdown-content{
+div #dropdown-content{
     display:none;
     position:absolute;
     background-color:  #26a69a;
-    min-width: 160px;
-
+    width: 160px;
+    
 }
 
-div .dropdown-content a {
+div #dropdown-content a {
     display:block;
 }
 
-div .dropdown-content a:hover{
+div #dropdown-content a:hover{
     background-color: black;
 }
-
-div.dropdown:hover div.dropdown-content{
+/*
+div #dropdown:hover div#dropdown-content{
     display:block;
 }
+*/
 .main {
     padding:10%;
 }
@@ -67,11 +66,13 @@ i .menu {
 i .content{
     color: black;
 }
-div .dropdown-content a {
+
+div #dropdown-content a {
 
     color: white;
     text-decoration: none;
 }
+
 a {
     color:black;
     text-decoration: none;
@@ -88,13 +89,15 @@ div.col {
     width: 100%;
     padding: 20px;
 }
+
+.material-icons{
+    font-size: 30px;
+}
+
 footer {
     width: 100%;
     text-align:center;
     font-size: 10px;
-    position:absolute;
-    bottom:0;
-    left:0;
     background-color: #26a69a;
     box-shadow: 0px 0px 5px black;
 }
