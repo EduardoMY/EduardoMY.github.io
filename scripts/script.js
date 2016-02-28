@@ -1,5 +1,3 @@
-//window.alert('Hello');
-
 var buttonMenu=document.getElementById("dropbtn");
 var menu=document.getElementById("dropdown-content");
 
