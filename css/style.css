@@ -126,7 +126,7 @@ footer {
 /* Smartphones */
 @media screen and (max-width: 768px)  {
     .material-icons{
-	font-size:20px;
+	font-size:35px;
     }
     article.main h1{
 	font-size:25px;
