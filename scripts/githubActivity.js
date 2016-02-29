@@ -1,27 +1,31 @@
-//GET the string of the 
-jQuery.githubUser = function(username, callback) {
-    jQuery.getJSON("http://github.com/api/v3/json/" + username + "?callback=?", callback);
-}
+function loadRepositories(){ 
+$.ajax({
+    type: "GET",
+    url: "https://api.github.com/users/eduardomy/repos",
+    dataType: "json",
+    success: function(result){
+        for(i in result){
+            $("#github-projects").append(
+              "<article class='github-repos'><a href='" + result[i].html_url + "' target='_blank'>" +
+              result[i].name + "</a></article>"
+            )
+        }
+    }   
 
-jQuery.fn.loadRepositories = function(username) {
-  this.html("<span>Querying GitHub for " + username +"'s repositories...</span>");
-
-  var target = this;
-  $.githubUser(username, function(data) {
-    var repos = data.user.repositories;
-    sortByNumberOfWatchers(repos);
-
-    var list = $('<dl/>');
-    target.empty().append(list);
-    $(repos).each(function() {
-      list.append('<dt><a href="'+ this.url +'">' + this.name + '</a></dt>');
-      list.append('<dd>' + this.description + '</dd>');
-    });
-  });
-
-  function sortByNumberOfWatchers(repos) {
-    repos.sort(function(a,b) {
-      return b.watchers - a.watchers;
-    });
-  }
+})
 };
+function loadAvatar(){
+    $.ajax(
+        {
+            type:"GET",
+            url:"https://api.github.com/users/eduardomy",
+            dataType: "json",
+            success: function(result){
+                $("#avatar").attr(
+                    "src",
+                    result.avatar_url   
+                );
+            }
+        }
+    );
+}

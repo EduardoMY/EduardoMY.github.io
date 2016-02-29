@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-            <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <title> Projects - Eduardo Medina Yllescas</title>
   </head>
   <body>
@@ -27,18 +27,21 @@
       </nav>
     </header>
     <div class="boxwrap">
-      <article class="main">
-	<h1> Hello World!  <i class="material-icons">face</i></h1>
-	<section class="main-content">  
-	  
-	</section>
-      </article>
+       	<h1> Projects  </h1>  
       <aside>
+          You can find 
       </aside>
+      <section id="github-projects" class="col-2">
+    </section>
     </div>
     <footer>
       This is a personal blog. I make use of Material design Concept and icons as well.  <i class="material-icons"> r </i>
     </footer>
     <script src="scripts/script.js"> </script>
+    <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+       <script src="scripts/githubActivity.js"> </script>
+    <script>
+        loadRepositories();
+    </script>
   </body>
 </html>

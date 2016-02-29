@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-            <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="css/style.css">
     <title> Contact - Eduardo Medina Yllescas</title>
   </head>
   <body>
-    <header>
-      <nav>
+      <header>
+    <nav>
 	<div id="dropdown">
 	  <button id="dropbtn">
 		  <i class="material-icons menu"> menu </i>
@@ -27,19 +27,36 @@
     </header>
     <div class="boxwrap">
       <div class="main">
-	<h1> Hello World!  <i class="material-icons">face</i></h1>
-	<i class="material-icons"> email </i> eduardo.medina@cetys.edu.mx
-	<i class="material-icons"> telephone </i>+52 (686) 1615045
-	linkedin: 
+	<h1> Contact  </h1>
+    <div class="row">
+    <div class="col-2"> 
+        <figure>
+            <img id="avatar" class="github-profile"/>
+        </figure> 
+    </div>
+    <div class="col-1">
+        <ul>    
+            <li><i class="material-icons"> email </i> <a href="mailto:eduardo.medina@cetys.edu.mx">eduardo.medina@cetys.edu.mx</a></li>
+            <li><i class="material-icons"> email </i> <a href="mailto:eduardo_medinay@hotmail.com"> eduardo_medinay@hotmail.com </a></li>
+            <li><i class="material-icons">phone</i> +52 (686) 1615045 </li>
+            <li>LinkedIn: <a href="https://www.linkedin.com/in/eduardo-medina-yllescas-60965682"> /eduardo-medina-yllescas </a> </li> 
+            <li>Github: <a href="http://www.github.com/EduardoMY"> EduardoMY </a> </li>
+        </ul>
       </div>
-      
+      </div>
       <aside>
       </aside>
+    </div>
     </div>
     <footer>
       This is a personal blog. I make use of Material design Concept and icons as well.  <i class="material-icons"> r </i>
     </footer>
-    <script src="scripts/script.js"> </script>
+  <script src="scripts/script.js"> </script>
+    <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+       <script src="scripts/githubActivity.js"> </script>
+    <script>
+        loadAvatar();
+    </script>
   </body>
 </html>
 
