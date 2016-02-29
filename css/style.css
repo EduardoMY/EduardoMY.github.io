@@ -76,6 +76,9 @@ a {
     text-decoration: none;
     cursor:pointer;
 }
+hr {
+    color: #1e88e5;
+}
 div.boxwrap{
     padding: 10px;
 }
@@ -85,25 +88,26 @@ aside {
 }
 section.col-2,div.col-2 {
     float:left;
-    height:100%;
-    min-height: 100%;
     width: 66%;
     padding:20px;
 }
-section.col-2,div.col-1{
-    height:100%;
+section.col-1,div.col-1{
+    float:left;
     width:33%;
     padding:20px;
 }
 
 section.col-3, div.col-3 {
-    height:100%;
     width: 100%;
     padding: 20px;
 }
-.github-repos{
+.github-repos-wrapper{
+    padding:10px;
     float:left;
     width:33%;
+}
+.github-repos{
+    background-color: #546e7a;
 }
 .github-profile{
     width:30px;
@@ -124,7 +128,7 @@ footer {
 
 
 /* Smartphones */
-@media screen and (max-width: 768px)  {
+@media screen and (min-width: 0px) and (max-width: 768px)  {
     .material-icons{
 	font-size:35px;
     }
@@ -143,16 +147,24 @@ footer {
     .col-2{
         width:100%;
     }
+    .github-repos-wrapper{
+        width:100%;
+    }
 }
 
 /* Tablets */
-@media screen and (min-width: 992px) and (max-width:1200){
+@media screen and (min-width: 769px) and (max-width:1200px){
     aside {
-	width: 33%;
+	width: 20%;
+    }
+    .col-2{
+        width:66%;
+    }
+    .github-repos-wrapper{
+        width:50%;
     }
 }
 
 /* Desktops */
 @media screen and (min-width: 1200px){
-
 }
