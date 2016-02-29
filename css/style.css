@@ -70,7 +70,10 @@ div #dropdown-content a {
     color: white;
     text-decoration: none;
 }
-
+li {
+    list-style-type: none;
+   
+}
 a {
     color:black;
     text-decoration: none;
@@ -82,39 +85,43 @@ hr {
 div.boxwrap{
     padding: 10px;
 }
+div.picture{
+    width:50%;
+    float:left;
+}
+div.contact{
+    width: 50%;
+    float:left;
+}
 aside {
-    width: 25%;
+    margin:auto;
+    text-align: center;
     float:left;
-}
-section.col-2,div.col-2 {
-    float:left;
-    width: 66%;
-    padding:20px;
-}
-section.col-1,div.col-1{
-    float:left;
-    width:33%;
-    padding:20px;
-}
-
-section.col-3, div.col-3 {
     width: 100%;
-    padding: 20px;
+}
+.github-projects{
+    margin:auto;
+    text-align: center;
+    padding:5px;
+    width: 100%;
+    float:left;
 }
 .github-repos-wrapper{
     padding:10px;
     float:left;
-    width:33%;
+    width:30%;
 }
 .github-repos{
-    background-color: #546e7a;
+        box-shadow: 0px 0px 5px black;
 }
 .github-profile{
-    width:30px;
-    height:40px;
+    width:50%;
+    height:50%; 
+    display: block;
+    margin:auto;
 }
 .material-icons{
-    font-size: 30px;
+    font-size: 25px;
 }
 
 footer {
@@ -129,6 +136,9 @@ footer {
 
 /* Smartphones */
 @media screen and (min-width: 0px) and (max-width: 768px)  {
+    div.boxwrap{
+    padding: 2px;
+    }
     .material-icons{
 	font-size:35px;
     }
@@ -138,31 +148,41 @@ footer {
     .main-content p{
 	font-size:18px;
     }
+    div.picture{
+        width:100%;
+    }
+    .github-profile{
+        width:50%;
+        height:50%;
+    }
+    div.contact{
+        width:100%;
+    }
     aside{
         width:100%;
     }
-    .col-1{
-        width:100%;
-    }
-    .col-2{
-        width:100%;
-    }
     .github-repos-wrapper{
-        width:100%;
+        width:96%;
     }
+    
 }
 
 /* Tablets */
 @media screen and (min-width: 769px) and (max-width:1200px){
-    aside {
-	width: 20%;
+    div.boxwrap{
+    padding: 5px;
+}
+    div.picture{
+        width:25%;
     }
-    .col-2{
-        width:66%;
+    .github-profile{
+        width:60%;
+        height:60%;
     }
     .github-repos-wrapper{
-        width:50%;
+        width:45%;
     }
+    
 }
 
 /* Desktops */
