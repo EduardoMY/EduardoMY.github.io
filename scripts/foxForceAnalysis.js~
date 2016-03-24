@@ -1,0 +1,4 @@
+//alert("Hello");
+//window.onload=createGraph();
+
+document.write($.getJSON("https://sheetsu.com/apis/ba40be2c"));
