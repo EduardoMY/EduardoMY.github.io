@@ -8,12 +8,34 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script src="scripts/foxForceAnalysis.js"> </script> 
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script> 
     <title> Fox Force - Eduardo Medina Yllescas</title>
+
+<style>
+.axis path,
+.axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    font-family: sans-serif;
+    font-size: 11px;
+}
+path { 
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+}
+    </style>
   </head>
   <body>
-<div id="data">
+    <br><br>
+    <div id="plp">
     </div>
+    <div id="drd">
+    </div>
+    <script src="scripts/foxForceAnalysis.js"> </script> 
 </body>
 </html>

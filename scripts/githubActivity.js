@@ -12,7 +12,6 @@ $.ajax({
             information[1]=result[i].name+"";
             information[2]=result[i].description+"";
             information[3]=result[i].created_at+"";
-            //alert(result[i].html_url);
             $("#github-projects").append(
               printIndividualRepos(information[0],
               information[1],information[2], information[3])
@@ -59,7 +58,6 @@ function sortName(){
 function sortDate(){
     var temp=[];
     $("#github-projects").empty();
-//    alert('Hello');
     for(var i=0; i<informationRepos.length; i++){
         for(var j=i+1; j<informationRepos.length; j++)
             if(informationRepos[j][3]<informationRepos[i][3])
