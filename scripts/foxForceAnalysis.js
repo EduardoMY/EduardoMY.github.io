@@ -6,11 +6,14 @@ var plpPoints;
 
 onload=function openXMLFIle(){
     var xhttp = new XMLHttpRequest();
+    
     xhttp.onreadystatechange = function(){
+	
 	if(xhttp.readyState==4 && xhttp.status==200){
 	    myFunction(xhttp);
 	}
     };
+    
     xhttp.open("GET", "data/data.xml", true);
     xhttp.send(null);
     
@@ -33,26 +36,25 @@ function getValuesPLP(nodeList){
     var xMax, xMin, yMax, yMin;
     
     while(nodeList != null){
-	if(nodeList.nodeType==1){
+	if(nodeList.nodeType==1)
 	    values.push(Number(nodeList.firstChild.nodeValue));
-//	    console.log(nodeList.firstChild.nodeValue);
-	}
 	nodeList=nodeList.nextSibling;
     };
     
     vLength=values.length;
     for(c=0; c<vLength/2; c++)
 	points.push({x:values[c], y:values[c+vLength/2]});
+    
     xMax=getMax(points, "x");
     xMin=getMin(points, "x");
-    yMin=Number(12);//getMin(points, "y");
+    yMin=Number(16);//getMin(points, "y");
     yMax=getMax(points, "y");
     console.log(xMax+"Holis");
     console.log(xMin);
     console.log(yMin);
     console.log(yMax);
     
-    buildGraph(points, xMin,xMax,yMin,yMax,'#plp');
+    buildGraph(points, xMin,xMax,yMin,yMax,'#plp');//, 'plp');
     plpPoints=points;
 }
 function getMax(points, variable){
@@ -136,7 +138,7 @@ function getValuesDRD(nodeList){
     continueGraph(sustainedLevelTurnPoints, 0,5.5,0,1.2,'#drd');
     continueGraph(ffPoints, 0,5.5,0,1.2,'#drd');
 
-    drdPoints=points;
+    drdPoints=values;
     
 }
 
@@ -162,7 +164,6 @@ function getSustainedLevelTurn(i, df, f, v13, v10, v6, v5, v9){
 	points.push({x:i,y:value});
 	i=i+df;
     }
-    //    value=(((16^2)*13*(x))/(0.5*9*(8^2)))+((0.5*9*(8^2)*12)/(x));
     return points;
     
 }
@@ -231,7 +232,7 @@ function buildGraph(points, xMin, xMax, yMin, yMax,id){
 	outerTickSize(0).
 	tickPadding(10);
     svg.append("g").
-	attr("class", "axis").
+	attr("class", "x axis").
 	attr("transform", "translate(0," + (height - padding) + ")").
 	call(xAxis);
     
@@ -244,7 +245,7 @@ function buildGraph(points, xMin, xMax, yMin, yMax,id){
 	outerTickSize(0).
 	tickPadding(10);;
     svg.append("g").
-	attr("class", "axis").
+	attr("class", "y axis").
 	attr("transform", "translate("+padding+", 0)").
 	call(yAxis);
 }
@@ -274,5 +275,116 @@ function continueGraph(points, xMin, xMax, yMin, yMax,id){
 }
 
 function rebuild(){
-    document.append("Hola");
+    var takeOfPoints=[];
+    var sustainedLevelTurnPoints=[];
+    var landingPoints=[];
+    var ffPoints=[];
+    var xMin, xMax, yMin, yMax;
+    var values=drdPoints;
+    
+    //Set the variables in the textboxes
+    values[0]=Number(document.getElementById("thrust").value);
+    values[5]=Number(document.getElementById("velocity").value);
+    values[6]=Number(document.getElementById("density").value);
+    
+    values[13]=Math.sqrt((((0.5*values[6]*(Math.pow(values[5], 2)))/(values[10]*(values[1]/values[2])))*
+			  ((values[0]/values[1])-(0.5*values[6]*(Math.pow(values[5],2))*(values[9]/(values[1]/values[2]))))));
+    
+    console.log(values[13]);
+    
+    takeOfPoints=getTakeOff(values[21],values[22],values[23],values[3], values[4], values[6], values[7]);
+    sustainedLevelTurnPoints=getSustainedLevelTurn(values[24], values[25], values[26],
+						  values[13], values[10], values[6], values[5], values[9]);
+    landingPoints=getLanding(values[27], values[28], values[29]);
+    ffPoints=getPreviousFox(values[30], values[31], values[32],
+			    values[0],values[2]);
+    
+    xMin=Math.min(getMin(takeOfPoints, "x"),
+		  getMin(sustainedLevelTurnPoints, "x"),
+		  getMin(landingPoints, "x"),
+		  getMin(ffPoints, "x"));
+    xMax=Math.max(getMax(takeOfPoints, "x"),
+		  getMax(sustainedLevelTurnPoints, "x"),
+		  getMax(landingPoints, "x"),
+		      getMax(ffPoints, "x"));
+    yMin=Math.min(getMin(takeOfPoints, "y"),
+		  getMin(sustainedLevelTurnPoints, "y"),
+		  getMin(landingPoints, "y"),
+		      getMin(ffPoints, "y"));
+    yMax=Math.max(getMax(takeOfPoints, "y"),
+		  getMax(sustainedLevelTurnPoints, "y"),
+		  getMax(landingPoints, "y"),
+		  getMax(ffPoints, "y"));
+    
+    console.log(xMin);
+    console.log(xMax);
+    console.log(yMin);
+    console.log(yMax); 
+    
+    modifyGraph(takeOfPoints, 0,5.5,0,1.2,'#drd');
+    continueGraph(landingPoints, 0,5.5,0,1.2,'#drd');
+    continueGraph(sustainedLevelTurnPoints, 0,5.5,0,1.2,'#drd');
+    continueGraph(ffPoints, 0,5.5,0,1.2,'#drd');
+
+    drdPoints=values;
 }
+
+function modifyGraph(points, xMin, xMax,yMin,yMax,id){
+    //setting up thep scale
+    var xScale = d3.scale.linear().
+	domain ([xMin, xMax]).
+	range([padding,width-padding]);
+    
+    var yScale = d3.scale.linear().
+	domain([yMin, yMax]).
+	range([height-padding,padding]);
+ 
+    var svg = d3.select(id).transition();
+
+        // Make the changes
+        var lines=d3.svg.line().
+	x(function (d) {return xScale(d.x);}).
+	    y(function (d) {return yScale(d.y);});
+    
+    svg.select(".line").
+	duration(750).
+	attr("d", lines(points));
+/*
+        //Building the axis
+    var xAxis = d3.svg.axis().
+	scale(xScale).
+	orient("bottom").
+	ticks(7).
+	innerTickSize(-width).
+	outerTickSize(0).
+	tickPadding(10);
+    svg.append("g").
+	attr("class", "x axis").
+	attr("transform", "translate(0," + (height - padding) + ")").
+	call(xAxis);
+  
+    //...and now the Yaxis
+    var yAxis=d3.svg.axis().
+	scale(yScale).
+	orient("left").
+	ticks(10).
+	innerTickSize(-width).
+	outerTickSize(0).
+	tickPadding(10);;
+    svg.append("g").
+	attr("class", "y axis").
+	attr("transform", "translate("+padding+", 0)").
+	call(yAxis);
+    
+        svg.select(".x .axis") // change the x axis
+            .duration(750)
+        .call(xAxis);
+
+
+    
+        svg.select(".y .axis") // change the y axis
+            .duration(750)
+        .call(yAxis);
+*/
+}
+
