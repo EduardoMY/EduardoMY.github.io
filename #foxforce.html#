@@ -24,7 +24,7 @@
   }
 
   .tick line{
-  opacity: 0.2;
+  opacity: 0.2;pp
   }
   .axis text {
   font-family: sans-serif;
