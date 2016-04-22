@@ -108,9 +108,9 @@ function getValuesDRD(nodeList){
     takeOfPoints=getTakeOff(values[21],values[22],values[23],values[3], values[4], values[6], values[7]);
     sustainedLevelTurnPoints=getSustainedLevelTurn(values[24], values[25], values[26],
 						  values[13], values[10], values[6], values[5], values[9]);
-    landingPoints=getLanding(values[27], values[28], values[29]);
     ffPoints=getPreviousFox(values[30], values[31], values[32],
 			    values[0],values[2]);
+    landingPoints=getLanding(values[27], values[28], values[29]);
     
     xMin=Math.min(getMin(takeOfPoints, "x"),
 		  getMin(sustainedLevelTurnPoints, "x"),
@@ -128,15 +128,11 @@ function getValuesDRD(nodeList){
 		  getMax(sustainedLevelTurnPoints, "y"),
 		  getMax(landingPoints, "y"),
 		      getMax(ffPoints, "y"));
-    console.log(xMin);
-    console.log(xMax);
-    console.log(yMin);
-    console.log(yMax);
     
-    buildGraph(takeOfPoints, 0,5.5,0,1.2,'#drd');
-    continueGraph(landingPoints, 0,5.5,0,1.2,'#drd');
-    continueGraph(sustainedLevelTurnPoints, 0,5.5,0,1.2,'#drd');
-    continueGraph(ffPoints, 0,5.5,0,1.2,'#drd');
+    buildGraph(takeOfPoints, 0,5.5,0,1.2,'#drd', 'take_off');
+    continueGraph(landingPoints, 0,5.5,0,1.2,'#drd', 'landing');
+    continueGraph(sustainedLevelTurnPoints, 0,5.5,0,1.2,'#drd', 'sustained_level_turn');
+    continueGraph(ffPoints, 0,5.5,0,1.2,'#drd', 'foxforce');
 
     drdPoints=values;
     
@@ -167,6 +163,7 @@ function getSustainedLevelTurn(i, df, f, v13, v10, v6, v5, v9){
     return points;
     
 }
+
 function getLanding(i, df, f){
     //Only a vertical line
     var value=Number(0.1);
@@ -179,6 +176,7 @@ function getLanding(i, df, f){
     return points;
     
 }
+
 function getPreviousFox(i, df, f, v0,v2){
     var pValue;
     var value;
@@ -194,7 +192,7 @@ function getPreviousFox(i, df, f, v0,v2){
 
 }
 
-function buildGraph(points, xMin, xMax, yMin, yMax,id){
+function buildGraph(points, xMin, xMax, yMin, yMax,id, subid=''){
     
     //setting up thep scale
     var xScale = d3.scale.linear().
@@ -219,7 +217,7 @@ function buildGraph(points, xMin, xMax, yMin, yMax,id){
 	x(function (d) {return xScale(d.x);}).
 	y(function (d) {return yScale(d.y);});
     svg.append("path").
-	attr("class", "line").
+	attr("class", "line " +subid).
 	attr("d", lines(points));
     
     
@@ -250,8 +248,7 @@ function buildGraph(points, xMin, xMax, yMin, yMax,id){
 	call(yAxis);
 }
 
-
-function continueGraph(points, xMin, xMax, yMin, yMax,id){
+function continueGraph(points, xMin, xMax, yMin, yMax,id, subid=''){
     
     //setting up thep scale
     var xScale = d3.scale.linear().
@@ -269,8 +266,9 @@ function continueGraph(points, xMin, xMax, yMin, yMax,id){
     var lines=d3.svg.line().
 	x(function (d) {return xScale(d.x);}).
 	y(function (d) {return yScale(d.y);});
+    
     svg.append("path").
-	attr("class", "line").
+	attr("class", "line " +subid).
 	attr("d", lines(points));
 }
 
@@ -295,9 +293,9 @@ function rebuild(){
     takeOfPoints=getTakeOff(values[21],values[22],values[23],values[3], values[4], values[6], values[7]);
     sustainedLevelTurnPoints=getSustainedLevelTurn(values[24], values[25], values[26],
 						  values[13], values[10], values[6], values[5], values[9]);
-    landingPoints=getLanding(values[27], values[28], values[29]);
     ffPoints=getPreviousFox(values[30], values[31], values[32],
 			    values[0],values[2]);
+    landingPoints=getLanding(values[27], values[28], values[29]);
     
     xMin=Math.min(getMin(takeOfPoints, "x"),
 		  getMin(sustainedLevelTurnPoints, "x"),
@@ -316,75 +314,14 @@ function rebuild(){
 		  getMax(landingPoints, "y"),
 		  getMax(ffPoints, "y"));
     
-    console.log(xMin);
-    console.log(xMax);
-    console.log(yMin);
-    console.log(yMax); 
+    //Removes the old chart
+    d3.select("#drdSvg").remove();
     
-    modifyGraph(takeOfPoints, 0,5.5,0,1.2,'#drd');
-    continueGraph(landingPoints, 0,5.5,0,1.2,'#drd');
-    continueGraph(sustainedLevelTurnPoints, 0,5.5,0,1.2,'#drd');
-    continueGraph(ffPoints, 0,5.5,0,1.2,'#drd');
-
+    // Builds the graph again
+    buildGraph(takeOfPoints, 0,5.5,0,1.2,'#drd', 'take_off');
+    continueGraph(landingPoints, 0,5.5,0,1.2,'#drd', 'landing');
+    continueGraph(sustainedLevelTurnPoints, 0,5.5,0,1.2,'#drd', 'sustained_level_turn');
+    continueGraph(ffPoints, 0,5.5,0,1.2,'#drd', 'foxforce');
+    
     drdPoints=values;
 }
-
-function modifyGraph(points, xMin, xMax,yMin,yMax,id){
-    //setting up thep scale
-    var xScale = d3.scale.linear().
-	domain ([xMin, xMax]).
-	range([padding,width-padding]);
-    
-    var yScale = d3.scale.linear().
-	domain([yMin, yMax]).
-	range([height-padding,padding]);
- 
-    var svg = d3.select(id).transition();
-
-        // Make the changes
-        var lines=d3.svg.line().
-	x(function (d) {return xScale(d.x);}).
-	    y(function (d) {return yScale(d.y);});
-    
-    svg.select(".line").
-	duration(750).
-	attr("d", lines(points));
-/*
-        //Building the axis
-    var xAxis = d3.svg.axis().
-	scale(xScale).
-	orient("bottom").
-	ticks(7).
-	innerTickSize(-width).
-	outerTickSize(0).
-	tickPadding(10);
-    svg.append("g").
-	attr("class", "x axis").
-	attr("transform", "translate(0," + (height - padding) + ")").
-	call(xAxis);
-  
-    //...and now the Yaxis
-    var yAxis=d3.svg.axis().
-	scale(yScale).
-	orient("left").
-	ticks(10).
-	innerTickSize(-width).
-	outerTickSize(0).
-	tickPadding(10);;
-    svg.append("g").
-	attr("class", "y axis").
-	attr("transform", "translate("+padding+", 0)").
-	call(yAxis);
-    
-        svg.select(".x .axis") // change the x axis
-            .duration(750)
-        .call(xAxis);
-
-
-    
-        svg.select(".y .axis") // change the y axis
-            .duration(750)
-        .call(yAxis);
-*/
-}
-

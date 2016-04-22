@@ -35,6 +35,22 @@
   stroke-width: 2;
   fill: none;
   }
+  .take_off{
+  stroke: steelblue;
+  color: steelblue;
+  }
+  .sustained_level_turn{
+  stroke:red;
+  color: red;
+  }
+  .foxforce{
+  stroke:yellow;
+  color:yellow;
+  }
+  .landing{
+  stroke:green;
+  color:green;
+  }
 </style>
 
   </head>
@@ -49,6 +65,12 @@
     Velocity: <input id="velocity" type="number" value=""> </input>
     Density: <input id="density" type="number" value=""> </input>
     <button class="pure-button" onClick="rebuild()">Build Graph </button>
+    <p>
+    <span class="take_off"> Take Off </span>
+    <span class="sustained_level_turn"> Sustained Level Turn </span>
+    <span class="foxforce"> Fox Force VI</span>
+    <span class="landing"> Landing </span>
+    </p>
     <div id="drd">
     </div>
     <script src="scripts/foxForceAnalysis.js"> </script> 
