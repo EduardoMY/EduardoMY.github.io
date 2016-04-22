@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script> 
+    <title> Fox Force - Eduardo Medina Yllescas</title>
+
+<style>
+  .axis path,
+  .axis line {
+  fill: none;
+  stroke: black;
+  shape-rendering: crispEdges;
+  }
+
+  .tick text{
+  font-size: 12px;
+  }
+
+  .tick line{
+  opacity: 0.2;pp
+  }
+  .axis text {
+  font-family: sans-serif;
+  font-size: 11px;
+  }
+  path { 
+  stroke: steelblue;
+  stroke-width: 2;
+  fill: none;
+  }
+  .take_off{
+  stroke: steelblue;
+  color: steelblue;
+  }
+  .sustained_level_turn{
+  stroke:red;
+  color: red;
+  }
+  .foxforce{
+  stroke:yellow;
+  color:yellow;
+  }
+  .landing{
+  stroke:green;
+  color:green;
+  }
+</style>
+
+  </head>
+  <body>
+    <h1> Payload Prediction </h1>
+    Variable: <input type="number" value=""></input>
+    <button class="pure-button"> Build Graph </button>
+    <div id="plp">
+    </div>
+    <h1> Restrictions Diagram </h1>
+    Thrust: <input id="thrust" type="number" value=""> </input>
+    Velocity: <input id="velocity" type="number" value=""> </input>
+    Density: <input id="density" type="number" value=""> </input>
+    <button class="pure-button" onClick="rebuild()">Build Graph </button>
+    <br>
+    <p>
+    <span class="take_off"> Take Off </span>
+    <span class="sustained_level_turn"> Sustained Level Turn </span>
+    <span class="foxforce"> Fox Force VI</span>
+    <span class="landing"> Landing </span>
+    </p>
+    <div id="drd">
+    </div>
+    <script src="scripts/foxForceAnalysis.js"> </script> 
+</body>
+</html>
