@@ -218,8 +218,7 @@ function buildGraph(points, xMin, xMax, yMin, yMax,id, subid=''){
 	y(function (d) {return yScale(d.y);});
     svg.append("path").
 	attr("class", "line " +subid).
-	attr("d", lines(points));
-    
+	attr("d", lines(points));    
     
     //Building the axis
     var xAxis = d3.svg.axis().
@@ -315,14 +314,16 @@ function rebuild(){
 		  getMax(landingPoints, "y"),
 		  getMax(ffPoints, "y"));
     
+   landingPoints.push({x: values[27], y:yMax+30});
+    
     //Removes the old chart
     d3.select("#drdSvg").remove();
     
     // Builds the graph again
-    buildGraph(takeOfPoints, 0,5.5,0,1.2,'#drd', 'take_off');
-    continueGraph(landingPoints, 0,5.5,0,1.2,'#drd', 'landing');
-    continueGraph(sustainedLevelTurnPoints, 0,5.5,0,1.2,'#drd', 'sustained_level_turn');
-    continueGraph(ffPoints, 0,5.5,0,1.2,'#drd', 'foxforce');
+    buildGraph(takeOfPoints, 0,xMax*1.5,0,yMax*1.3,'#drd', 'take_off');
+    continueGraph(landingPoints, 0,xMax*1.5,0, yMax*1.3,'#drd', 'landing');
+    continueGraph(sustainedLevelTurnPoints, 0,xMax * 1.5,0, yMax*1.3,'#drd', 'sustained_level_turn');
+    continueGraph(ffPoints, 0,xMax * 1.5,0, yMax * 1.3,'#drd', 'foxforce');
     
     drdPoints=values;
 }
