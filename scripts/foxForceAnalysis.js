@@ -270,6 +270,7 @@ function continueGraph(points, xMin, xMax, yMin, yMax,id, subid=''){
     svg.append("path").
 	attr("class", "line " +subid).
 	attr("d", lines(points));
+    console.log("lol");
 }
 
 function rebuild(){
