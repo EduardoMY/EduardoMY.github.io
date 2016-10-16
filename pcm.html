@@ -8,8 +8,16 @@
     <title>PanCakes Maker</title>
   </head>
   <body>
-    <Canvas id="drawing" width="300" height="600" style="border:1px solid #000000;">
+    <button class="pure-button"> Print</button>
+    <button class="pure-button">Clear All</button>
+    <br>
+    <center>
+      <Canvas id="drawing" height="130" style="width: 80% ;border:1px solid #000000;"
+	      onmousedown="mouseDown()" onmouseover="mouseOver()" onmousemove="mouseMove(event)">
     </Canvas>
+    </center>
+    <p id="coor"> </p>
+    <script src="scripts/pcmCode.js"> </script>
   </body>
 </html>
 
