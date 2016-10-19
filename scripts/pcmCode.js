@@ -65,5 +65,6 @@ function print(){
 function clearAll(){
     context.clearRect(0, 0, canvas.width, canvas.height);
 }
-//document.getElementById('drawing').width=width;
-//alert('Hello');
+function try(){
+    alert('Hello');
+}
