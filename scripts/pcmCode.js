@@ -19,13 +19,22 @@ function mouseUp(){
     //alert("Hey");
 }
 
+function touchMove(e){
+    var touch = e.touches[0];
+    movement(touch.clientX, touch.clientY);
+}
+
 function mouseMove(e){
+    movement(e.clientX, e.clientY);
+}
+
+function movement(xLocal, yLocal){
     var rect = canvas.getBoundingClientRect();
     if(clickState){
 	prevX = x;
 	prevY = y;
-	x = e.clientX - rect.left;
-	y = e.clientY - rect.top;
+	x = xLocal - rect.left;
+	y = yLocal - rect.top;
 	updateCoor();
 	draw();
     }
@@ -54,8 +63,6 @@ function updateCoor(){
     });
     coor=x + " "+ y;
     document.getElementById("coor").innerHTML = coor;
-}
-function mouseOut(){
 }
 
 function print(){

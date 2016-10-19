@@ -13,9 +13,9 @@
     <button class="pure-button" onclick="back()">Back </button>
     <br><br>
     <center>
-      <Canvas id="drawing" height="300" style="border:1px solid #000000;"
+      <Canvas id="drawing" height="100" style="border:1px solid #000000;"
 	      onmousedown="mouseDown()" onmouseup="mouseUp()" onmousemove="mouseMove(event)"
-	      ontouchstart="mouseDown()" ontouchend="mouseUp()" ontouchmove="example()">
+	      ontouchstart="mouseDown()" ontouchend="mouseUp()" ontouchmove="touchMove(event)">
       </Canvas>
     </center>
     <p id="coor"> </p>
