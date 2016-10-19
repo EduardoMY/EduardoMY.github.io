@@ -1,24 +1,49 @@
+//variables definition
 var width=screen.width;
 var canvas = document.getElementById('drawing');
+var context = canvas.getContext("2d");
+var clickState = false;
+var x=-1, y=-1;
+var prevX=-1, prevY=-1;
+
+//variables declaration
+canvas.width=window.innerWidth*.8;
 
 function mouseDown(){
-    alert('Hola Amiguito');
+    clickState=true;
 }
 
-function mouseOver(){
-    //alert('Hola Amiguito Over');
+function mouseUp(){
+    clickState=false;
+    //alert("Hey");
 }
 
 function mouseMove(e){
-    var rect = canvas.getBoundingClientRect();
-    var pos={
-	x: e.clientX - rect.left,
-	y: e.clientY - rect.top
-    };
-    updateCoor(pos);
+    if(clickState){
+	var rect = canvas.getBoundingClientRect();
+	prevX = x;
+	prevY = y;
+	x = e.clientX - rect.left;
+	y = e.clientY - rect.top;
+	updateCoor();
+	draw();
+    }
 }
-function updateCoor(pos){
-    coor=pos.x + " "+ pos.y;
+
+function draw(){
+    if(prevX!=-1){
+	context.beginPath();
+	context.moveTo(prevX, prevY);
+	context.lineTo(x, y);
+	context.strokeStyle = "black";
+	context.lineWidth = 2;
+	context.stroke();
+	context.closePath();
+    }
+}
+
+function updateCoor(){
+    coor=x + " "+ y;
     document.getElementById("coor").innerHTML = coor;
 }
 function mouseOut(){
