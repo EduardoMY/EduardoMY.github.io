@@ -1,10 +1,11 @@
 //variables definition
-var width=screen.width;
+var xyArray=[];
 var canvas = document.getElementById('drawing');
 var context = canvas.getContext("2d");
 var clickState = false;
 var x=-1, y=-1;
 var prevX=-1, prevY=-1;
+
 
 //variables declaration
 canvas.width=window.innerWidth*.8;
@@ -19,14 +20,18 @@ function mouseUp(){
 }
 
 function mouseMove(e){
+    var rect = canvas.getBoundingClientRect();
     if(clickState){
-	var rect = canvas.getBoundingClientRect();
 	prevX = x;
 	prevY = y;
 	x = e.clientX - rect.left;
 	y = e.clientY - rect.top;
 	updateCoor();
 	draw();
+    }
+    else {
+	x=-1;
+	y=-1
     }
 }
 
@@ -43,6 +48,10 @@ function draw(){
 }
 
 function updateCoor(){
+    xyArray.push({
+	    x: x,
+	    y: y
+    });
     coor=x + " "+ y;
     document.getElementById("coor").innerHTML = coor;
 }
@@ -50,10 +59,11 @@ function mouseOut(){
 }
 
 function print(){
-    
+    alert(xyArray);
 }
 
 function clearAll(){
+    context.clearRect(0, 0, canvas.width, canvas.height);
 }
 //document.getElementById('drawing').width=width;
 //alert('Hello');

@@ -8,12 +8,14 @@
     <title>PanCakes Maker</title>
   </head>
   <body>
-    <button class="pure-button"> Print</button>
-    <button class="pure-button">Clear All</button>
-    <br>
+    <button class="pure-button" onclick="print()"> Print</button>
+    <button class="pure-button" onclick="clearAll()">Clear All</button>
+    <button class="pure-button" onclick="back()">Back </button>
+    <br><br>
     <center>
       <Canvas id="drawing" height="500" style="border:1px solid #000000;"
-	      onmousedown="mouseDown()" onmouseup="mouseUp()" onmousemove="mouseMove(event)">
+	      onmousedown="mouseDown()" onmouseup="mouseUp()" onmousemove="mouseMove(event)"
+	      ontouchstart="mouseDown()" ontouchend="mouseUp()" ontouchmove="mouseMove(event)">
       </Canvas>
     </center>
     <p id="coor"> </p>
