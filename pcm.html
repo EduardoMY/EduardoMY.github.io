@@ -5,17 +5,31 @@
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <title>PanCakes Maker</title>
+    <title> PanCakes Maker </title>
   </head>
   <body>
+    <div class="pure-menu pure-menu-horizontal">
+      <a href="#" class="pure-menu-heading pure-menu-link">EMY</a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item"><a href="#" class="pure-menu-link"></a></li>
+        <li class="pure-menu-item"><a href="#" class="pure-menu-link">Hola</a></li>
+        <li class="pure-menu-item"><a href="#" class="pure-menu-link">Hola</a></li>
+	<!-- </ul> -->
+	<span id="custom-menu">
+          <!-- <ul class="pure-menu-list"> -->
+	  <li class="pure-menu-item"> <a href="#" class="pure-menu-link"> Ip Adress:  </a> </li>
+	  <li class="pure-menu-item"> <input type="email" placeholder="Email"></li>
+	</span>
+      </ul>
+    </div>
     <button class="pure-button" onclick="print()"> Print</button>
     <button class="pure-button" onclick="clearAll()">Clear All</button>
     <button class="pure-button" onclick="back()">Back </button>
     <br><br>
     <center>
       <Canvas id="drawing" height="100" style="border:1px solid #000000;"
-	      onmousedown="mouseDown()" onmouseup="mouseUp()" onmousemove="mouseMove(event)"
-	      ontouchstart="mouseDown()" ontouchend="mouseUp()" ontouchmove="touchMove(event)">
+	      onmousedown="mouseDown()" onmouseup="mouseUp()" onmousemove="mouseMove(event)" onmouseout="mouseOut()"
+	      ontouchstart="mouseDown()" ontouchend="mouseUp()" ontouchmove="touchMove(event)" ontouchcancel="mouseUp()">
       </Canvas>
     </center>
     <p id="coor"> </p>

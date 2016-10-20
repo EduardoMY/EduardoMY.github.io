@@ -1,22 +1,45 @@
 //variables definition
-var xyArray=[];
+var xyArray=[]; //Temporal
+var xyPaths=[];
+var images=[];
 var canvas = document.getElementById('drawing');
 var context = canvas.getContext("2d");
 var clickState = false;
-var x=-1, y=-1;
-var prevX=-1, prevY=-1;
+var x=-1, y=-1, prevX=-1, prevY=-1; //X's y Y's
 
 
 //variables declaration
 canvas.width=window.innerWidth*.8;
+canvas.height=window.innerHeight*.7;
+
+init();
+
+function init(){
+    xyArray=[];
+    xyPaths=[];
+    images=[];
+}
 
 function mouseDown(){
+    console.log("mouse down");
     clickState=true;
 }
 
 function mouseUp(){
-    clickState=false;
-    //alert("Hey");
+    console.log("mouse up");
+    endOfPath();
+}
+
+function mouseOut(){
+    console.log("mouse out");
+    endOfPath();
+}
+function endOfPath(){
+    if(clickState && xyArray.length!=0){
+	clickState=false;
+	xyPaths.push(xyArray);
+	xyArray=[];
+    }
 }
 
 function touchMove(e){
@@ -28,15 +51,17 @@ function mouseMove(e){
     movement(e.clientX, e.clientY);
 }
 
-function movement(xLocal, yLocal){
+function movement(xLocal, yLocal, color="black"){
     var rect = canvas.getBoundingClientRect();
     if(clickState){
 	prevX = x;
 	prevY = y;
 	x = xLocal - rect.left;
 	y = yLocal - rect.top;
-	updateCoor();
-	draw();
+	if(xyArray.length==0)
+	    	images.push(context.getImageData(0,0,canvas.width, canvas.height));
+	draw(color);
+	    updateCoor();
     }
     else {
 	x=-1;
@@ -44,13 +69,13 @@ function movement(xLocal, yLocal){
     }
 }
 
-function draw(){
+function draw(color){
     if(prevX!=-1){
 	context.beginPath();
 	context.moveTo(prevX, prevY);
 	context.lineTo(x, y);
-	context.strokeStyle = "black";
-	context.lineWidth = 2;
+	context.strokeStyle = color;
+	context.lineWidth = 1;
 	context.stroke();
 	context.closePath();
     }
@@ -58,22 +83,32 @@ function draw(){
 
 function updateCoor(){
     xyArray.push({
-	    x: x,
-	    y: y
+	    pX: x,
+	    pY: y
     });
-    coor=x + " "+ y;
-    document.getElementById("coor").innerHTML = coor;
 }
 
 function print(){
-    alert(xyArray);
+    alert(xyArray.length);
+    var msg="";
+    var req={
+    method: 'POST',
+    url: 'http://33.33.33.15/user/signin',
+    headers : {
+        'Content-Type' : 'application/json'
+    },
+    data: JSON.stringify({ test: 'test' })
+    };
 }
 
 function clearAll(){
     context.clearRect(0, 0, canvas.width, canvas.height);
+    init();
 }
+
 function back(){
-}
-function example(){
-    alert('Hello');
+    if(images.length==0)
+	return;
+    xyPaths.pop();
+    context.putImageData(images.pop(), 0, 0);
 }
