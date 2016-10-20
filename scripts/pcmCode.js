@@ -6,7 +6,7 @@ var canvas = document.getElementById('drawing');
 var context = canvas.getContext("2d");
 var clickState = false;
 var x=-1, y=-1, prevX=-1, prevY=-1; //X's y Y's
-
+var thickness=2;
 
 //variables declaration
 canvas.width=window.innerWidth*.8;
@@ -35,14 +35,18 @@ function mouseOut(){
     endOfPath();
 }
 function endOfPath(){
+
     if(clickState && xyArray.length!=0){
 	clickState=false;
 	xyPaths.push(xyArray);
 	xyArray=[];
     }
+    x=-1;
+    y=-1;
 }
 
 function touchMove(e){
+    console.log("Console LOG");
     var touch = e.touches[0];
     movement(touch.clientX, touch.clientY);
 }
@@ -59,23 +63,21 @@ function movement(xLocal, yLocal, color="black"){
 	x = xLocal - rect.left;
 	y = yLocal - rect.top;
 	if(xyArray.length==0)
-	    	images.push(context.getImageData(0,0,canvas.width, canvas.height));
+	    images.push(context.getImageData(0,0,canvas.width, canvas.height));
 	draw(color);
-	    updateCoor();
-    }
-    else {
-	x=-1;
-	y=-1
+	updateCoor();
     }
 }
 
 function draw(color){
-    if(prevX!=-1){
+    console.log("prevX"+prevX);
+    console.log("Array: "+xyArray.length);
+    if(prevX!=-1 && xyArray.length>1){
 	context.beginPath();
 	context.moveTo(prevX, prevY);
 	context.lineTo(x, y);
 	context.strokeStyle = color;
-	context.lineWidth = 1;
+	context.lineWidth = thickness;
 	context.stroke();
 	context.closePath();
     }
