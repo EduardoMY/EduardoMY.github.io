@@ -1,5 +1,5 @@
 //variables definition
-var xyArray=[]; //Temporal
+var xyArray=[];
 var xyPaths=[];
 var images=[];
 var canvas = document.getElementById('drawing');
@@ -7,10 +7,11 @@ var context = canvas.getContext("2d");
 var clickState = false;
 var x=-1, y=-1, prevX=-1, prevY=-1; //X's y Y's
 var thickness=2;
+//var maxX=, maxY=;
 
 //variables declaration
-canvas.width=window.innerWidth*.8;
-canvas.height=window.innerHeight*.7;
+canvas.width=window.innerWidth*.9;
+canvas.height=canvas.width/2;
 
 init();
 
@@ -21,17 +22,17 @@ function init(){
 }
 
 function mouseDown(){
-    console.log("mouse down");
+//    console.log("mouse down");
     clickState=true;
 }
 
 function mouseUp(){
-    console.log("mouse up");
+//    console.log("mouse up");
     endOfPath();
 }
 
 function mouseOut(){
-    console.log("mouse out");
+//    console.log("mouse out");
     endOfPath();
 }
 function endOfPath(){
@@ -46,7 +47,7 @@ function endOfPath(){
 }
 
 function touchMove(e){
-    console.log("Console LOG");
+//    console.log("Console LOG");
     var touch = e.touches[0];
     movement(touch.clientX, touch.clientY);
 }
@@ -70,8 +71,8 @@ function movement(xLocal, yLocal, color="black"){
 }
 
 function draw(color){
-    console.log("prevX"+prevX);
-    console.log("Array: "+xyArray.length);
+//    console.log("prevX"+prevX);
+//    console.log("Array: "+xyArray.length);
     if(prevX!=-1 && xyArray.length>1){
 	context.beginPath();
 	context.moveTo(prevX, prevY);
@@ -91,16 +92,21 @@ function updateCoor(){
 }
 
 function print(){
-    alert(xyArray.length);
-    var msg="";
-    var req={
-    method: 'POST',
-    url: 'http://33.33.33.15/user/signin',
-    headers : {
-        'Content-Type' : 'application/json'
-    },
-    data: JSON.stringify({ test: 'test' })
-    };
+    $.ajax({
+	type: 'POST',
+	url: document.getElementById('ip').value,
+	crossDomain: true,
+	contentType: 'application/json;charset=UTF-8"',
+	data: JSON.stringify({ name: "Prueba1", paths: xyPaths }),
+	success: function(response){
+	    console.log("profit");
+	},
+	error: function(XMLHttpRequest, textStatus, errorThrown){
+	    console.log("Hubo un error amiguito");
+	    console.log("Error: "+errorThrown);
+	}
+    });
+    console.log("Wups");
 }
 
 function clearAll(){
@@ -114,3 +120,4 @@ function back(){
     xyPaths.pop();
     context.putImageData(images.pop(), 0, 0);
 }
+//50 mm, 30
