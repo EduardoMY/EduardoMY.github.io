@@ -7,11 +7,11 @@ var context = canvas.getContext("2d");
 var clickState = false;
 var x=-1, y=-1, prevX=-1, prevY=-1; //X's y Y's
 var thickness=2;
-//var maxX=, maxY=;
+var sizeX=500, sizeY=300, stepsPerMM=5;
 
 //variables declaration
 canvas.width=window.innerWidth*.9;
-canvas.height=canvas.width/2;
+canvas.height=canvas.width*3/5;
 
 init();
 
@@ -86,8 +86,8 @@ function draw(color){
 
 function updateCoor(){
     xyArray.push({
-	    pX: x,
-	    pY: y
+	pX: Math.round(x/canvas.width*sizeX*stepsPerMM),
+	pY: Math.round(y/canvas.height*sizeY*stepsPerMM)
     });
 }
 
