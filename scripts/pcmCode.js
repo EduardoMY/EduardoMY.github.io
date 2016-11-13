@@ -95,9 +95,9 @@ function print(){
 	type: 'POST',
 	url: document.getElementById('ip').value,
 	crossDomain: true,
-	contentType: 'text', //'application/json;charset=UTF-8"',
+	contentType: 'application/json;charset=UTF-8"',
 	dataType: 'text',
-	data: "Hi", //JSON.stringify({ name: "Prueba1", paths: xyPaths }),
+	data: JSON.stringify({ name: "Prueba1", paths: xyPaths }),
 	success: function(response){
 	    console.log("profit");
 	},
