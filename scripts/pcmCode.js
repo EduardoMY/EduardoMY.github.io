@@ -6,7 +6,7 @@ var context = canvas.getContext("2d");
 var clickState = false;
 var x=-1, y=-1, prevX=-1, prevY=-1; //X's y Y's
 var thickness=2;
-var sizeX=480, sizeY=190, stepsPerMM=5; //Y=250
+var sizeX=450, sizeY=190, stepsPerMM=5; //Y=250
 
 //variables declaration
 canvas.width=window.innerWidth*.9;
@@ -95,8 +95,9 @@ function print(){
 	type: 'POST',
 	url: document.getElementById('ip').value,
 	crossDomain: true,
-	contentType: 'application/json;charset=UTF-8"',
-	data: JSON.stringify({ name: "Prueba1", paths: xyPaths }),
+	contentType: 'text', //'application/json;charset=UTF-8"',
+	dataType: 'text',
+	data: "Hi", //JSON.stringify({ name: "Prueba1", paths: xyPaths }),
 	success: function(response){
 	    console.log("profit");
 	},
