@@ -5,7 +5,7 @@ var canvas = document.getElementById('drawing');
 var context = canvas.getContext("2d");
 var clickState = false;
 var x=-1, y=-1, prevX=-1, prevY=-1; //X's y Y's
-var thickness=2;
+var thickness=4;
 var sizeX=450, sizeY=190, stepsPerMM=5; //Y=250
 
 //variables declaration
