@@ -93,17 +93,19 @@ function updateCoor(){
 function print(){
     $.ajax({
 	type: 'POST',
-	url: document.getElementById('ip').value,
+	url: document.getElementById('ip').value + "/move",
 	crossDomain: true,
 	contentType: 'application/json;charset=UTF-8"',
 	dataType: 'text',
 	data: JSON.stringify({ name: "Prueba1", paths: xyPaths }),
 	success: function(response){
 	    console.log("profit");
+      alert("Tu pancake esta en proceso. ");
 	},
 	error: function(XMLHttpRequest, textStatus, errorThrown){
 	    console.log("Hubo un error amiguito");
 	    console.log("Error: "+errorThrown);
+      alert("Hubo un error, vuelve a intentarlo");
 	}
     });
     console.log("Wups");
