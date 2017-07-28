@@ -1,60 +1,31 @@
-var informationRepos=[];
+loadRepositories();
 
-function loadRepositories(){ 
-$.ajax({
-    type: "GET",
-    url: "https://api.github.com/users/eduardomy/repos",
-    dataType: "json",
-    success: function(result){
-        for(var i in result){
-            var information=[];
-            information[0]=result[i].html_url+"";
-            information[1]=result[i].name+"";
-            information[2]=result[i].description+"";
-            information[3]=result[i].created_at+"";
-            $("#github-projects").append(
-              printIndividualRepos(information[0],
-              information[1],information[2], information[3])
-            )
-            informationRepos.push(information);
-        }
-    }   
-
-})
-};
-
-function printIndividualRepos(url, name, description,date ){
-            //alert(url);
-             return "<div class='github-repos-wrapper'>"+
-             "<article class='github-repos'><a href='" + url + 
-              "' target='_blank'>" +
-              name + "</a><hr>"+
-              description + "<hr>Date: "+
-              date +"</article></div>";
-}
-
-function sortName(){
-    var temp=[];
-    $("#github-projects").empty();
-    
-    for(var i=0; i<informationRepos.length; i++){
-        for(var j=i+1; j<informationRepos.length; j++){
-            if(informationRepos[j][1]<informationRepos[i][1])
-                {
-                    temp=informationRepos[i];    
-                    informationRepos[i]=informationRepos[j];
-                    informationRepos[j]=temp;
-                }   
-        }
-             $("#github-projects").append(
-              printIndividualRepos(
-                  informationRepos[i][0],
-                  informationRepos[i][1],
-                  informationRepos[i][2],
-                  informationRepos[i][3])
-            );   
+function loadRepositories(){
+   var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+	    addRepos(JSON.parse(xmlHttp.responseText));
     }
+    xmlHttp.open("GET", "https://api.github.com/users/eduardomy/repos?sort=updated", true);
+    xmlHttp.send(null);
 }
+
+function addRepos(repos){
+    var container = document.getElementById('two').getElementsByClassName('row')[0];
+    for(var i=0; i < repos.length && i<6; i++){
+	var article = document.createElement('article');
+	var header = document.createElement('h3');
+	var par = document.createElement('p');
+	article.className = '6u 12u$(xsmall) work-item';
+	header.appendChild(document.createTextNode(repos[i].name))
+	par.appendChild(document.createTextNode(repos[i].description))
+	article.appendChild(header);
+	article.appendChild(par);
+	container.appendChild(article);
+    }
+
+}
+
 function sortDate(){
     var temp=[];
     $("#github-projects").empty();
