@@ -1595,7 +1595,11 @@
 	p {
 		margin: 0 0 2em 0;
 	}
-
+	
+	p.warning {
+	    color: #EE2245;
+	    font-size:smaller;
+	}
 	h1, h2, h3, h4, h5, h6 {
 		color: #787878;
 		font-weight: 400;
@@ -1988,7 +1992,6 @@
 			-webkit-transition: opacity 0.2s ease-in-out;
 			-ms-transition: opacity 0.2s ease-in-out;
 			transition: opacity 0.2s ease-in-out;
-			background: url("images/overlay.png");
 			border-radius: 0.35em;
 			content: '';
 			display: block;
@@ -2649,11 +2652,11 @@
 	}
 
 	/* Footer Exception */
-	@media screen and (min-width: 1280px){
+	@media screen and (min-width: 980px){
 	    #footer{
 		position: fixed;
 		bottom: 10%;
-		left: 20% ;
+		left: 10% ;
 	    }
 	}
 	
